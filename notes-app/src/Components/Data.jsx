@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import "../Style.css";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import Notes from "./Notes";
+import LeftSlider from "./LeftSlider";
 
 const Data = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [colorGroupChoice, setColorGroupChoice] = useState(false);
   const [colorChoice, setColorChoice] = useState(false);
+  const [userIdClicked, setUserIdClicked] = useState(0);
   const [createGroup, setCreateGroup] = useState({
     id: 0,
     groupName: "",
@@ -14,8 +17,11 @@ const Data = () => {
     create: false,
   });
 
+  const handleClick = (value) => {
+    console.log(value);
+    setOpen(value);
+  };
   const { id, groupName, color, create } = createGroup;
-  // const [userIdClicked, setUserIdClicked] = useState(0);
 
   const handleUserIdClicked = (id) => {
     setUserIdClicked(id);
@@ -24,15 +30,20 @@ const Data = () => {
     setCreateGroup({ ...createGroup, groupName: e.target.value });
     setColorGroupChoice(true);
   };
-
+  const submitCheck = () => {
+    if (colorChoice === true && groupName !== "") {
+      return true;
+    } else return false;
+  };
   //submit
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    if (colorChoice == true && groupName != "") {
+    if (submitCheck() === true) {
       setCreateGroup({ ...createGroup, create: true });
-      console.log("submitted")
+      console.log("submitted");
+      setOpen(false);
     }
   };
 
@@ -64,6 +75,40 @@ const Data = () => {
   };
   return (
     <>
+      <div>
+        {submitCheck() ? (
+          <div>
+            <LeftSlider
+              color={color}
+              id={id}
+              groupName={groupName}
+              create={create}
+              handleClick ={()=>{console.log("hello")}}
+              handleUserIdClicked={handleUserIdClicked}
+            />
+          </div>
+        ) : (
+          <div>
+            <LeftSlider
+              handleClick={()=>{console.log("hello")}}
+              
+            />
+          </div>
+        )}
+        {userIdClicked > 0 ? (
+          <div>
+            <Notes userIdClicked={userIdClicked} />
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <RightSlider />
+          </div>
+        )}
+      </div>
+
+      {/* Modal */}
+
       <Modal
         open={open}
         onClose={() => {
@@ -92,24 +137,54 @@ const Data = () => {
             )}
           </p>
           <p>
-          <span>Choose Colour</span>
-          &nbsp; &nbsp;
-          <span>
-            <button type="button" className="colorBtn1" onClick={funColor1}></button>&nbsp;
-            <button type="button" className="colorBtn2" onClick={funColor2}></button>&nbsp;
-            <button  type="button" className="colorBtn3" onClick={funColor3}></button>&nbsp;
-            <button  type="button" className="colorBtn4" onClick={funColor4}></button>&nbsp;
-            <button type="button" className="colorBtn5" onClick={funColor5}></button>&nbsp;
-            <button type="button" className="colorBtn6" onClick={funColor6}></button>&nbsp;
-          </span>
+            <span>Choose Colour</span>
+            &nbsp; &nbsp;
+            <span>
+              <button
+                type="button"
+                className="colorBtn1"
+                onClick={funColor1}
+              ></button>
+              &nbsp;
+              <button
+                type="button"
+                className="colorBtn2"
+                onClick={funColor2}
+              ></button>
+              &nbsp;
+              <button
+                type="button"
+                className="colorBtn3"
+                onClick={funColor3}
+              ></button>
+              &nbsp;
+              <button
+                type="button"
+                className="colorBtn4"
+                onClick={funColor4}
+              ></button>
+              &nbsp;
+              <button
+                type="button"
+                className="colorBtn5"
+                onClick={funColor5}
+              ></button>
+              &nbsp;
+              <button
+                type="button"
+                className="colorBtn6"
+                onClick={funColor6}
+              ></button>
+              &nbsp;
+            </span>
           </p>
           {colorChoice === false ? (
             <p style={{ color: "red", fontSize: "10px" }}>
               Please choose the colour
             </p>
           ) : null}
-          <button type= "submit"
-          
+          <button
+            type="submit"
             style={{
               background: "blue",
               borderRadius: "12px",

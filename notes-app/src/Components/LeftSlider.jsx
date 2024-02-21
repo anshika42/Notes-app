@@ -1,19 +1,20 @@
 import React from "react";
 import { useState } from "react";
-import Data from "./Data";
 
-const Slider = () => {
+const LeftSlider = (props) => {
+  console.log(props);
   return (
     <div
       style={{
         width: "30vw",
         border: "1px solid #FFFFFF",
         height: "100vh",
-        overflowY:"scroll"
+        overflowY: "scroll",
       }}
     >
-      <h1 style={{ fontSize: "140%" ,margin : "10vh" }}>Pocket Notes</h1>
+      <h1 style={{ fontSize: "140%", margin: "10vh" }}>Pocket Notes</h1>
       <button
+        onClick={() => props.handleClick(true)}
         style={{
           borderRadius: "63px",
           background: "blue",
@@ -23,13 +24,11 @@ const Slider = () => {
           marginTop: "100%",
           marginLeft: "75%",
         }}
-        onClick={Data}
       >
-        {" "}
-        +{" "}
+        +
       </button>
     </div>
   );
 };
 
-export default Slider;
+export default LeftSlider;
