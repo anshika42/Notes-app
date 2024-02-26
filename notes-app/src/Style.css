@@ -52,13 +52,4 @@
     text-transform: "Capitalize";
   };
 
-  .notesEnter{
-    background-color:"#e8e8e8";
-    position:"fixed";
-    bottom:"0px";
-    width:"70vw";
-    height:"20vh";
-    display:"flex";
-    justify-content:"center";
-    align-items:"center";
-  }
+  
