@@ -4,10 +4,10 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import Notes from "./Notes";
 import LeftSlider from "./LeftSlider";
+import RightSlider from "./RightSlider"
 
 const Data = () => {
   const [open, setOpen] = useState(false);
-  const [colorGroupChoice, setColorGroupChoice] = useState(false);
   const [colorChoice, setColorChoice] = useState(false);
   const [userIdClicked, setUserIdClicked] = useState(0);
   const [createGroup, setCreateGroup] = useState({
@@ -16,19 +16,17 @@ const Data = () => {
     color: "",
     create: false,
   });
+  const { id, groupName, color, create } = createGroup;
 
   const handleClick = (value) => {
-    console.log(value);
     setOpen(value);
   };
-  const { id, groupName, color, create } = createGroup;
 
   const handleUserIdClicked = (id) => {
     setUserIdClicked(id);
   };
   const handleNotesChange = (e) => {
     setCreateGroup({ ...createGroup, groupName: e.target.value });
-    setColorGroupChoice(true);
   };
   const submitCheck = () => {
     if (colorChoice === true && groupName !== "") {
@@ -38,13 +36,13 @@ const Data = () => {
   //submit
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
+    // e.preventDefault();
     if (submitCheck() === true) {
       setCreateGroup({ ...createGroup, create: true });
-      console.log("submitted");
       setOpen(false);
+      
     }
+   
   };
 
   // color filter
@@ -75,7 +73,7 @@ const Data = () => {
   };
   return (
     <>
-      <div>
+      <div style={{display:"flex"}}>
         {submitCheck() ? (
           <div>
             <LeftSlider
@@ -83,14 +81,14 @@ const Data = () => {
               id={id}
               groupName={groupName}
               create={create}
-              handleClick ={()=>{console.log("hello")}}
+              handleClick ={handleClick}
               handleUserIdClicked={handleUserIdClicked}
             />
           </div>
         ) : (
           <div>
             <LeftSlider
-              handleClick={()=>{console.log("hello")}}
+              handleClick={handleClick}
               
             />
           </div>
@@ -100,7 +98,7 @@ const Data = () => {
             <Notes userIdClicked={userIdClicked} />
           </div>
         ) : (
-          <div>
+          <div >
             {" "}
             <RightSlider />
           </div>
@@ -118,7 +116,7 @@ const Data = () => {
         center={true}
       >
         <h2>Create New Group</h2>
-        <form>
+        <form action="">
           <p>
             {" "}
             <span>Group Name </span>
@@ -128,7 +126,7 @@ const Data = () => {
               placeholder="Enter group name"
               onChange={(e) => handleNotesChange(e)}
             ></input>
-            {groupName === "" ? (
+            {groupName === ""  ? (
               <p style={{ color: "red", fontSize: "10px" }}>
                 Please Enter Group Name{" "}
               </p>
@@ -182,7 +180,7 @@ const Data = () => {
             <p style={{ color: "red", fontSize: "10px" }}>
               Please choose the colour
             </p>
-          ) : null}
+          ) : ""}
           <button
             type="submit"
             style={{

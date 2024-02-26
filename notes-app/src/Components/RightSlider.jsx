@@ -1,10 +1,10 @@
 import React from 'react'
 import image from "../Image/background.png"
+import LeftSlider from './LeftSlider'
 
-const Main = () => {
+const RightSlider = () => {
   return (
     <div style={{display:"flex"}}>
-      
       <div style={{background:"#DAE5F5", width:"66vw" ,height:"100vh"}}>
       <img style={{ width:"299px" ,marginTop:"25%" , marginLeft:"25%"}}src= {image} />
       <h2 style={{marginLeft:"40%"}}>Pocket Notes</h2>
@@ -15,4 +15,4 @@ Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
   )
 }
 
-export default Main
+export default RightSlider
