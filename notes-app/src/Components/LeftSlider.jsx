@@ -12,37 +12,37 @@ const LeftSlider = ({
   // console.log(groupName.split(" "));
   // console.log(groupName ,color,create);
   const storedDataString = localStorage.getItem("userInfo");
-  const storedData =   JSON.parse(storedDataString) || [] ;
-  const newId = storedData.length>0 ? storedData[storedData.length -1].id+1 :1;
+  const storedData = JSON.parse(storedDataString) || [];
+  const newId =
+    storedData.length > 0 ? storedData[storedData.length - 1].id + 1 : 1;
   // console.log(newId);
-   const newData = {
+  const newData = {
     id: newId,
     groupName: groupName,
-    color: color , 
-    create : create
-   }
+    color: color,
+    create: create,
+  };
   const submitCheck = () => {
     if (create === true && groupName !== "") {
       return true;
     } else return false;
   };
-  useEffect(()=>{
-    if(submitCheck()){
+  useEffect(() => {
+    if (submitCheck()) {
       storedData.push(newData);
-      localStorage.setItem("userInfo" , JSON.stringify(storedData));
-
+      localStorage.setItem("userInfo", JSON.stringify(storedData));
     }
-  },[groupName, create, newData]);
+  }, [groupName, create, newData]);
   return (
     <>
       <div
         style={{
           width: "30vw",
           border: "1px solid #FFFFFF",
-          height: "95.5vh",
+          height: "98.5vh",
           overflowY: "scroll",
-         
-          overflowX:"hidden"
+          backgroundColor: "#e8e8e8",
+          overflowX: "hidden",
         }}
       >
         <h1 style={{ fontSize: "140%", margin: "10vh" }}>Pocket Notes</h1>
@@ -54,26 +54,35 @@ const LeftSlider = ({
             width: "4vw",
             color: "white",
             fontSize: "43px",
-            marginLeft:"75%",
-            marginTop:"-7%",
-           marginBottom:"2%"
-            
+            marginLeft: "75%",
+            marginTop: "-7%",
+            marginBottom: "2%",
           }}
         >
           +
         </button>
-       
-        <br/>
-      <div>
-      {
-        storedData.map((item)=>(
-          <NotesGroup key={item.id} color={item.color} groupName={item.groupName} colorId = {item.id}/>
-        ))
-      }
+
+        <br />
+        <div>
+          {storedData.map((item) =>
+            item.create ? (
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  handleUserIdClicked(item.id);
+                }}
+              >
+                <NotesGroup
+                  key={item.id}
+                  color={item.color}
+                  groupName={item.groupName}
+                  colorId={item.id}
+                />
+              </span>
+            ) : null
+          )}
+        </div>
       </div>
-      </div>
-     
-      
     </>
   );
 };

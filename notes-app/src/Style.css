@@ -45,3 +45,20 @@
 .colorBtn1:active ,.colorBtn2:active , .colorBtn3:active ,.colorBtn4:active,.colorBtn5:active,.colorBtn6:active{
     border: 3px solid #020202;
 }
+.NotesName {
+    display: "flex";
+    justify-content: "center";
+    align-items: "center";
+    text-transform: "Capitalize";
+  };
+
+  .notesEnter{
+    background-color:"#e8e8e8";
+    position:"fixed";
+    bottom:"0px";
+    width:"70vw";
+    height:"20vh";
+    display:"flex";
+    justify-content:"center";
+    align-items:"center";
+  }

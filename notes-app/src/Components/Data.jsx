@@ -23,6 +23,7 @@ const Data = () => {
   };
 
   const handleUserIdClicked = (id) => {
+    console.log(id);
     setUserIdClicked(id);
   };
   const handleNotesChange = (e) => {
@@ -89,7 +90,7 @@ const Data = () => {
           <div>
             <LeftSlider
               handleClick={handleClick}
-              
+              handleUserIdClicked={handleUserIdClicked}
             />
           </div>
         )}
